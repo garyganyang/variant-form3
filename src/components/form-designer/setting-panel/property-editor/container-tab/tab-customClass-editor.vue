@@ -17,8 +17,12 @@
         <template #item="{ element: tpItem, index: tpIdx }">
           <li class="col-item">
             <!-- span style="margin-right: 12px">{{tpIdx + 1}}</span -->
-            <el-checkbox v-model="tpItem.options.active" disabled @change="(evt) => onTabPaneActiveChange(evt, tpItem)"
-                         style="margin-right: 8px">{{i18nt('designer.setting.paneActive')}}</el-checkbox>
+            <el-checkbox v-model="tpItem.options.active"
+                         disabled
+                         style="margin-right: 8px"
+                         @change="(evt) => onTabPaneActiveChange(evt, tpItem)">
+              {{i18nt('designer.setting.paneActive')}}
+            </el-checkbox>
             <el-input link type="primary" v-model="tpItem.options.label" style="width: 155px"></el-input>
             <i class="iconfont icon-drag drag-option"></i>
             <el-button circle plain size="small" type="danger" @click="deleteTabPane(selectedWidget, tpIdx)"
