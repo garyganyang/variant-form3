@@ -3,6 +3,10 @@
     <el-form :model="formConfig" size="small" label-position="left" label-width="120px"
              class="setting-form" @submit.prevent>
       <el-collapse v-model="formActiveCollapseNames" class="setting-collapse">
+
+        <slot name="customFormSetting"></slot>
+
+
         <el-collapse-item name="1" :title="i18nt('designer.setting.basicSetting')">
           <el-form-item :label="i18nt('designer.setting.formSize')">
             <el-select v-model="formConfig.size">
@@ -13,15 +17,15 @@
           </el-form-item>
           <el-form-item :label="i18nt('designer.setting.labelPosition')">
             <el-radio-group v-model="formConfig.labelPosition" class="radio-group-custom">
-              <el-radio-button label="left">{{i18nt('designer.setting.leftPosition')}}</el-radio-button>
-              <el-radio-button label="top">{{i18nt('designer.setting.topPosition')}}</el-radio-button>
+              <el-radio-button value="left">{{i18nt('designer.setting.leftPosition')}}</el-radio-button>
+              <el-radio-button value="top">{{i18nt('designer.setting.topPosition')}}</el-radio-button>
             </el-radio-group>
           </el-form-item>
           <el-form-item :label="i18nt('designer.setting.labelAlign')">
             <el-radio-group v-model="formConfig.labelAlign" class="radio-group-custom">
-              <el-radio-button label="label-left-align">{{i18nt('designer.setting.leftAlign')}}</el-radio-button>
-              <el-radio-button label="label-center-align">{{i18nt('designer.setting.centerAlign')}}</el-radio-button>
-              <el-radio-button label="label-right-align">{{i18nt('designer.setting.rightAlign')}}</el-radio-button>
+              <el-radio-button value="label-left-align">{{i18nt('designer.setting.leftAlign')}}</el-radio-button>
+              <el-radio-button value="label-center-align">{{i18nt('designer.setting.centerAlign')}}</el-radio-button>
+              <el-radio-button value="label-right-align">{{i18nt('designer.setting.rightAlign')}}</el-radio-button>
             </el-radio-group>
           </el-form-item>
           <el-form-item :label="i18nt('designer.setting.labelWidth')">
@@ -137,11 +141,13 @@
   import i18n from "@/utils/i18n"
   import CodeEditor from '@/components/code-editor/index'
   import {deepClone, insertCustomCssToHead, insertGlobalFunctionsToHtml} from "@/utils/util"
+  import ToolbarPanel from "@/components/form-designer/toolbar-panel/index.vue";
 
   export default {
     name: "form-setting",
     mixins: [i18n],
     components: {
+      ToolbarPanel,
       CodeEditor,
     },
     props: {
@@ -153,7 +159,7 @@
       return {
         designerConfig: this.getDesignerConfig(),
 
-        formActiveCollapseNames: ['1', '2'],
+        formActiveCollapseNames: ['0', '1', '2'],
 
         formSizes: [
           {label: 'default', value: ''},

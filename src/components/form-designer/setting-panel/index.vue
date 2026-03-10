@@ -66,7 +66,11 @@
 
       <el-tab-pane v-if="!!designer" :label="i18nt('designer.hint.formSetting')" name="2">
         <el-scrollbar class="setting-scrollbar" :style="{height: scrollerHeight}">
-          <form-setting :designer="designer" :form-config="formConfig"></form-setting>
+          <form-setting :designer="designer" :form-config="formConfig">
+            <template v-for="(_, slotName) in $slots" #[slotName]>
+              <slot :name="slotName"></slot>
+            </template>
+          </form-setting>
         </el-scrollbar>
       </el-tab-pane>
     </el-tabs>

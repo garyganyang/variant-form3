@@ -14,7 +14,9 @@
           {{i18nt('designer.toolbar.mobileLayout')}}</el-button>
       </el-button-group>
       <el-button style="margin-left: 20px" :title="i18nt('designer.toolbar.nodeTreeHint')" @click="showNodeTreeDrawer">
-        <svg-icon icon-class="node-tree" /></el-button>
+        <svg-icon icon-class="node-tree" />
+      </el-button>
+      <div class="" style="line-height: 32px; margin-left: 10px; font-size: 12px;">Ver {{vFormVersion}}</div>
     </div>
 
     <el-drawer :title="i18nt('designer.toolbar.nodeTreeTitle')" direction="ltr" v-model="showNodeTreeDrawerFlag" :modal="true" :size="280"
@@ -202,6 +204,7 @@
   import { saveAs } from 'file-saver'
   import axios from 'axios'
   import SvgIcon from "@/components/svg-icon/index";
+  import {VARIANT_FORM_VERSION} from "@/utils/config";
 
   export default {
     name: "ToolbarPanel",
@@ -222,6 +225,7 @@
     inject: ['getDesignerConfig'],
     data() {
       return {
+        vFormVersion: VARIANT_FORM_VERSION,
         designerConfig: this.getDesignerConfig(),
 
         toolbarWidth: 460,
