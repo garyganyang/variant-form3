@@ -335,7 +335,8 @@
           display: inline-block;
           height: 32px;
           line-height: 32px;
-          width: 98px;
+          width: 118px;
+          box-sizing: border-box;
           float: left;
           margin: 2px 6px 6px 0;
           cursor: move;

@@ -16,7 +16,7 @@
       <el-button style="margin-left: 20px" :title="i18nt('designer.toolbar.nodeTreeHint')" @click="showNodeTreeDrawer">
         <svg-icon icon-class="node-tree" />
       </el-button>
-      <div class="" style="line-height: 32px; margin-left: 10px; font-size: 12px;">Ver {{vFormVersion}}</div>
+      <div class="" style="line-height: 38px; margin-left: 10px; font-size: 12px;">Ver {{vFormVersion}}</div>
     </div>
 
     <el-drawer :title="i18nt('designer.toolbar.nodeTreeTitle')" direction="ltr" v-model="showNodeTreeDrawerFlag" :modal="true" :size="280"
@@ -732,6 +732,9 @@
 </script>
 
 <style lang="scss" scoped>
+  .toolbar-container{
+    display: flex;
+  }
   .toolbar-container:after {
     display: block;
     content: "";
@@ -741,20 +744,25 @@
   .left-toolbar {
     display: flex;
     margin-top: 4px;
-    float: left;
+    //float: left;
+    width: 400px;
     font-size: 16px;
   }
 
   .right-toolbar {
     display: flex;
-    float: right;
+    flex: 1;
+    width: 100%;
+    //float: right;
     line-height: 42px;
     text-align: right;
     overflow: hidden;
 
     .right-toolbar-con {
-      text-align: left;
-      width: 600px;
+      //text-align: left;
+      text-align: right;
+      //width: 600px;
+      width: 100%;
     }
 
     :deep(.el-button) {
