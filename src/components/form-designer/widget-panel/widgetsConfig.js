@@ -766,9 +766,9 @@ export const advancedFields = [
       customRule: '',
       customRuleHint: '',
       //-------------------
-      uploadURL: '',
+      uploadURL: '/epms2-api/xfjy/api/epms/file/upload',
       uploadTip: '',
-      withCredentials: false,
+      withCredentials: true,
       multipleSelect: false,
       showFileList: true,
       limit: 3,
@@ -782,7 +782,7 @@ export const advancedFields = [
       labelTooltip: null,
       //-------------------
       onCreated: '',
-      onMounted: '',
+      onMounted: 'this.uploadHeaders = {Authorization: `Bearer ${JSON.parse(localStorage.getItem("E-o-token")).content}` }',
       onBeforeUpload: '',
       onUploadSuccess: '',
       onUploadError: '',
@@ -811,9 +811,9 @@ export const advancedFields = [
       customRule: '',
       customRuleHint: '',
       //-------------------
-      uploadURL: '',
+      uploadURL: '/epms2-api/xfjy/api/epms/file/upload',
       uploadTip: '',
-      withCredentials: false,
+      withCredentials: true,
       multipleSelect: false,
       showFileList: true,
       limit: 3,
@@ -827,7 +827,7 @@ export const advancedFields = [
       labelTooltip: null,
       //-------------------
       onCreated: '',
-      onMounted: '',
+      onMounted: 'this.uploadHeaders = {Authorization: `Bearer ${JSON.parse(localStorage.getItem("E-o-token")).content}` }',
       onBeforeUpload: '',
       onUploadSuccess: '',
       onUploadError: '',
