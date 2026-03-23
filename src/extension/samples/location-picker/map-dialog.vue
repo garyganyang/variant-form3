@@ -10,10 +10,10 @@
       <img src="./grn-circle.png" class="icon-class" style="">
     </div>
     <template #footer>
-        <span class="dialog-footer flex justify-end gap-2">
-      <el-button @click="visible = false">关闭</el-button>
-      <el-button type="primary" @click="handleSubmit">确定</el-button>
-        </span>
+      <span class="dialog-footer flex justify-end gap-2">
+        <el-button @click="visible = false">关闭</el-button>
+        <el-button type="primary" @click="handleSubmit">确定</el-button>
+      </span>
     </template>
   </el-dialog>
 </template>
