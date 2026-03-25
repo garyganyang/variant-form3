@@ -1,7 +1,7 @@
 import {translate} from "@/utils/i18n"
 import emitter from '@/utils/emitter'
 
-export const createInputTextEditor = function (propName, propLabelKey) {
+export const createInputTextEditor = function (propName, propLabelKey, placehodler) {
   return {
     props: {
       optionModel: Object,
@@ -9,7 +9,7 @@ export const createInputTextEditor = function (propName, propLabelKey) {
     render(h) {
       return (
         <el-form-item label={translate(propLabelKey)}>
-          <el-input type="text" v-model={this.optionModel[propName]} />
+          <el-input type="text" v-model={this.optionModel[propName]} placeholder={placehodler} clearable/>
         </el-form-item>
       )
     }
@@ -76,7 +76,6 @@ export const createCheckboxGroupEditor = function (propName, propLabelKey, confi
     }
   }
 }
-
 
 export const createRadioGroupEditor = function (propName, propLabelKey, configs) {
   return {

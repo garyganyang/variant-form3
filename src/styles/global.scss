@@ -11,7 +11,7 @@ $--color-primary: #409EFF;
 
 .form-widget-list {
 
-  .ghost{
+  .ghost {
     content: '';
     font-size: 0;
     height: 3px;
@@ -26,7 +26,7 @@ $--color-primary: #409EFF;
 
 .el-form-item {
 
-  .el-rate{
+  .el-rate {
     margin-top: 8px;
   }
 }
@@ -36,7 +36,7 @@ $--color-primary: #409EFF;
     line-height: 36px !important;
   }
 
-  .el-rate{
+  .el-rate {
     margin-top: 8px;
   }
 }
@@ -46,7 +46,7 @@ $--color-primary: #409EFF;
     line-height: 32px !important;
   }
 
-  .el-rate{
+  .el-rate {
     margin-top: 6px;
   }
 }
@@ -56,7 +56,7 @@ $--color-primary: #409EFF;
     line-height: 28px !important;
   }
 
-  .el-rate{
+  .el-rate {
     margin-top: 4px;
   }
 }
@@ -66,7 +66,11 @@ $--color-primary: #409EFF;
   margin-bottom: 3px;
 }
 
-input[type="password"]::-ms-reveal {  /* 隐藏IE/Edge原生的密码查看按钮 */
+.el-image-viewer__mask {
+  opacity: 1;
+}
+
+input[type="password"]::-ms-reveal { /* 隐藏IE/Edge原生的密码查看按钮 */
   display: none;
 }
 
@@ -101,9 +105,9 @@ input[type="password"]::-ms-reveal {  /* 隐藏IE/Edge原生的密码查看按�
   background-color: rgba(#101F1C, 0.85);
 }
 
-* {//Firefox浏览器滚动条样式
+* { //Firefox浏览器滚动条样式
   scrollbar-color: #e5e5e5 #f7f7f9; //滚动条轨道颜色、滚动条滑块的颜色
-  scrollbar-width: thin;     //thin模式下滚动条两端的三角按钮会消失
+  scrollbar-width: thin; //thin模式下滚动条两端的三角按钮会消失
 }
 
 

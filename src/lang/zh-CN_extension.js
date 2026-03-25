@@ -3,7 +3,8 @@ export default {
         widgetLabel: {
             card: '卡片',
             alert: '提示',
-            'location-picker': '地图选点'
+            'location-picker': '地图选点',
+            'el-table': '数据表格',
         },
 
         setting: {
@@ -21,7 +22,13 @@ export default {
             showIcon: '显示图标',
             effect: '显示效果',
 
-            locationPickerTitle: '天地图标题'
+            locationPickerTitle: '天地图标题',
+            tableHeight: "表格高度",
+            border: "边框",
+            advanced: '高级',
+            columnList: '表格列编辑',
+            actionList: '操作列编辑',
+            actionColumnFixedWidth: '操作列宽度',
         },
 
     }

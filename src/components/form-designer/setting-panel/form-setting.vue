@@ -120,9 +120,9 @@
 
     <div v-if="showEditFunctionsDialogFlag" class="" v-drag="['.drag-dialog.el-dialog', '.drag-dialog .el-dialog__header']">
       <el-dialog :title="i18nt('designer.setting.globalFunctions')" v-model="showEditFunctionsDialogFlag"
-                 :show-close="true" class="drag-dialog small-padding-dialog" append-to-body
+                 :show-close="true" class="drag-dialog small-padding-dialog" append-to-body fullscreen
                  :close-on-click-modal="false" :close-on-press-escape="false" :destroy-on-close="true">
-        <code-editor :mode="'javascript'" :readonly="false" v-model="functionsCode" ref="gfEditor"></code-editor>
+        <code-editor :mode="'javascript'" :max-lines="55" :readonly="false" v-model="functionsCode" ref="gfEditor"></code-editor>
         <template #footer>
           <div class="dialog-footer">
             <el-button @click="showEditFunctionsDialogFlag = false">
@@ -142,11 +142,13 @@
   import CodeEditor from '@/components/code-editor/index'
   import {deepClone, insertCustomCssToHead, insertGlobalFunctionsToHtml} from "@/utils/util"
   import ToolbarPanel from "@/components/form-designer/toolbar-panel/index.vue";
+  import {CircleCloseFilled} from "@element-plus/icons-vue";
 
   export default {
     name: "form-setting",
     mixins: [i18n],
     components: {
+      CircleCloseFilled,
       ToolbarPanel,
       CodeEditor,
     },

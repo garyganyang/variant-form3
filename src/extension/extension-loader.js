@@ -1,9 +1,5 @@
 //import { vfApp } from '@/utils/create-app'
-
-import {
-    addContainerWidgetSchema,
-    addCustomWidgetSchema
-} from '@/components/form-designer/widget-panel/widgetsConfig'
+import {addContainerWidgetSchema, addCustomWidgetSchema} from '@/components/form-designer/widget-panel/widgetsConfig'
 import * as PERegister from '@/components/form-designer/setting-panel/propertyRegister'
 import * as PEFactory from '@/components/form-designer/setting-panel/property-editor-factory.jsx'
 
@@ -19,11 +15,13 @@ import {registerFWGenerator} from '@/utils/sfc-generator'
 import {alertTemplateGenerator} from '@/extension/samples/extension-sfc-generator'
 
 import {loadLocationPickerWidget} from '@/extension/samples/location-picker/loader'
+import {loadElTableWidget} from '@/extension/samples/el-table/loader'
 
 
 export const loadExtension = function (app) {
 
     loadLocationPickerWidget(app) //
+    loadElTableWidget(app) //
     /**
      * 加载容器组件步骤：
      * 1. 加载组件Json Schema;
