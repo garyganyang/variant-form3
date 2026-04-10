@@ -1,49 +1,55 @@
 <template>
   <div class="toolbar-container">
     <div class="left-toolbar">
-      <el-button link type="primary" :disabled="undoDisabled" :title="i18nt('designer.toolbar.undoHint')" @click="undoHistory">
-        <svg-icon icon-class="undo" /></el-button>
-      <el-button link type="primary" :disabled="redoDisabled" :title="i18nt('designer.toolbar.redoHint')" @click="redoHistory">
-        <svg-icon icon-class="redo" /></el-button>
-      <el-button-group style="margin-left: 20px">
-        <el-button :type="layoutType === 'PC' ? 'info': ''" @click="changeLayoutType('PC')">
-          {{i18nt('designer.toolbar.pcLayout')}}</el-button>
-        <el-button :type="layoutType === 'Pad' ? 'info': ''" @click="changeLayoutType('Pad')">
-          {{i18nt('designer.toolbar.padLayout')}}</el-button>
-        <el-button :type="layoutType === 'H5' ? 'info': ''" @click="changeLayoutType('H5')">
-          {{i18nt('designer.toolbar.mobileLayout')}}</el-button>
-      </el-button-group>
-      <el-button style="margin-left: 20px" :title="i18nt('designer.toolbar.nodeTreeHint')" @click="showNodeTreeDrawer">
+      <el-button link type="primary" :disabled="undoDisabled" :title="i18nt('designer.toolbar.undoHint')" style="height:30px" @click="undoHistory">
+        <svg-icon icon-class="undo" />
+      </el-button>
+      <el-button link type="primary" :disabled="redoDisabled" :title="i18nt('designer.toolbar.redoHint')" style="height:30px;margin-right: 10px" @click="redoHistory">
+        <svg-icon icon-class="redo" />
+      </el-button>
+      <div class="hidden" style="display: inline-flex">
+        <el-button-group style="margin-right: 10px">
+          <el-button :type="layoutType === 'PC' ? 'info': ''" @click="changeLayoutType('PC')">
+            {{i18nt('designer.toolbar.pcLayout')}}</el-button>
+          <el-button :type="layoutType === 'Pad' ? 'info': ''" @click="changeLayoutType('Pad')">
+            {{i18nt('designer.toolbar.padLayout')}}</el-button>
+          <el-button :type="layoutType === 'H5' ? 'info': ''" @click="changeLayoutType('H5')">
+            {{i18nt('designer.toolbar.mobileLayout')}}</el-button>
+        </el-button-group>
+      </div>
+      <el-button style="margin-right: 10px" :title="i18nt('designer.toolbar.nodeTreeHint')" @click="showNodeTreeDrawer">
         <svg-icon icon-class="node-tree" />
       </el-button>
-      <div class="" style="line-height: 38px; margin-left: 10px; font-size: 12px;">Ver {{vFormVersion}}</div>
+      <div class="hidden" style="display: inline-flex">
+        <div class="" style="line-height: 38px; margin-right: 10px; font-size: 12px;">Ver {{vFormVersion}}</div>
+      </div>
     </div>
 
-    <el-drawer :title="i18nt('designer.toolbar.nodeTreeTitle')" direction="ltr" v-model="showNodeTreeDrawerFlag" :modal="true" :size="280"
-               :destroy-on-close="true" class="node-tree-drawer">
-      <el-tree ref="nodeTree" :data="nodeTreeData" node-key="id" default-expand-all highlight-current class="node-tree"
-               icon-class="el-icon-arrow-right" @node-click="onNodeTreeClick"></el-tree>
-    </el-drawer>
-
-    <div class="right-toolbar" :style="{width: toolbarWidth + 'px'}">
+    <div class="right-toolbar full-w" :style="{width: toolbarWidth + 'px'}">
       <div class="right-toolbar-con">
-        <el-button v-if="showToolButton('clearDesignerButton')" link type="primary" @click="clearFormWidget">
+        <el-button v-if="showToolButton('clearDesignerButton')" link type="primary" style="height:30px;" @click="clearFormWidget">
           <svg-icon icon-class="el-delete" />{{i18nt('designer.toolbar.clear')}}</el-button>
-        <el-button v-if="showToolButton('previewFormButton')" link type="primary" @click="previewForm">
+        <el-button v-if="showToolButton('previewFormButton')" link type="primary" style="height:30px;" @click="previewForm">
           <svg-icon icon-class="el-view" />{{i18nt('designer.toolbar.preview')}}</el-button>
-        <el-button v-if="showToolButton('importJsonButton')" link type="primary" @click="importJson">
+        <el-button v-if="showToolButton('importJsonButton')" link type="primary" style="height:30px;" @click="importJson">
           {{i18nt('designer.toolbar.importJson')}}</el-button>
-        <el-button v-if="showToolButton('exportJsonButton')" link type="primary" @click="exportJson">
+        <el-button v-if="showToolButton('exportJsonButton')" link type="primary" style="height:30px;" @click="exportJson">
           {{i18nt('designer.toolbar.exportJson')}}</el-button>
-        <el-button v-if="showToolButton('exportCodeButton')" link type="primary" @click="exportCode">
+        <el-button v-if="showToolButton('exportCodeButton')" link type="primary" style="height:30px;" @click="exportCode">
           {{i18nt('designer.toolbar.exportCode')}}</el-button>
-        <el-button v-if="showToolButton('generateSFCButton')" link type="primary" @click="generateSFC">
+        <el-button v-if="showToolButton('generateSFCButton')" link type="primary" style="height:30px;" @click="generateSFC">
           <svg-icon icon-class="vue-sfc" />{{i18nt('designer.toolbar.generateSFC')}}</el-button>
         <template v-for="(idx, slotName) in $slots">
           <slot :name="slotName"></slot>
         </template>
       </div>
     </div>
+
+    <el-drawer v-model="showNodeTreeDrawerFlag" :title="i18nt('designer.toolbar.nodeTreeTitle')" direction="ltr" :modal="true" :size="280"
+               :destroy-on-close="true" class="node-tree-drawer">
+      <el-tree ref="nodeTree" :data="nodeTreeData" node-key="id" default-expand-all highlight-current class="node-tree"
+               icon-class="el-icon-arrow-right" @node-click="onNodeTreeClick"></el-tree>
+    </el-drawer>
 
     <div v-if="showPreviewDialogFlag" class="" v-drag="['.drag-dialog.el-dialog', '.drag-dialog .el-dialog__header']">
       <el-dialog :title="i18nt('designer.toolbar.preview')" v-model="showPreviewDialogFlag"
@@ -732,27 +738,38 @@
 </script>
 
 <style lang="scss" scoped>
+
+@media (max-width: 1450px) {
+  .hidden{
+    display: none !important;
+  }
+  .full-w{
+    width: 100% !important;
+  }
+}
+
   .toolbar-container{
     display: flex;
+    justify-content: space-between;
   }
   .toolbar-container:after {
-    display: block;
-    content: "";
-    clear: both;
+    //display: block;
+    //content: "";
+    //clear: both;
   }
 
   .left-toolbar {
     display: flex;
     margin-top: 4px;
     //float: left;
-    width: 400px;
+    //width: 400px;
     font-size: 16px;
   }
 
   .right-toolbar {
-    display: flex;
-    flex: 1;
-    width: 100%;
+    //display: flex;
+    //flex: 1;
+    //width: 100%;
     //float: right;
     line-height: 42px;
     text-align: right;
