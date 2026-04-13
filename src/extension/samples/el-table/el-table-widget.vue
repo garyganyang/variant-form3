@@ -8,7 +8,7 @@
     <!--              :show-icon="field.options.showIcon" :effect="field.options.effect" @close="handleCloseCustomEvent"></el-alert>-->
     <!--    :data="field.options.tableData"-->
     <el-table ref="fieldEditor"
-              v-loading="field.options.loading"
+              v-loading="fieldModel.loading"
               :data="fieldModel.data"
               :border="field.options.border"
               :height="field.options.tableHeight? field.options.tableHeight : '300px'"
@@ -166,7 +166,6 @@ export default {
       default: () => {
         return {
           options: {
-            loading: null,
             border: null,
             actionColumnFixedWidth: 120,
             onHeaderClick: null,
@@ -212,11 +211,12 @@ export default {
   data() {
     return {
       fieldModel: {
+        loading: false,
         pageSize: 10,
         pageNum: 1,
-        totalElements: 250,
-        data1: [],
-        data: [{}, {}, {}, {}, {
+        totalElements: 0,
+        data: [],
+        data1: [{}, {}, {}, {}, {
           avatar: "https://fuss10.elemecdn.com/1/34/19aa98b1fcb2781c4fba33d850549jpeg.jpeg",
           avatars: [
             {"url": "https://fuss10.elemecdn.com/1/34/19aa98b1fcb2781c4fba33d850549jpeg.jpeg"},
