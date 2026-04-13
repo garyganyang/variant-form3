@@ -1,4 +1,6 @@
 import axios from 'axios'
+import axiosInstance from '@/axios/axiosInstance'
+import { $localStorage } from "@/axios/application-storage.js";
 
 import VFormDesigner from '@/components/form-designer/index.vue'
 import VFormRender from '@/components/form-render/index.vue'
@@ -60,6 +62,8 @@ const install = (app) => {
   })
 
   window.axios = axios
+  window.$axios = axiosInstance
+  window.$localStorage = $localStorage
 }
 
 if (typeof window !== 'undefined' && window.Vue) { /* script方式引入时赋值axios！！ */
