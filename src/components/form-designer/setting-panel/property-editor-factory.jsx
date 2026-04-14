@@ -1,7 +1,7 @@
 import {translate} from "@/utils/i18n"
 import emitter from '@/utils/emitter'
 
-export const createInputTextEditor = function (propName, propLabelKey, placehodler, required) {
+export const createInputTextEditor = function (propName, propLabelKey, placeholder, required) {
   return {
     props: {
       optionModel: Object,
@@ -9,7 +9,7 @@ export const createInputTextEditor = function (propName, propLabelKey, placehodl
     render(h) {
       return (
         <el-form-item label={translate(propLabelKey)}  required={required} >
-          <el-input type="text" v-model={this.optionModel[propName]} placeholder={placehodler} clearable/>
+          <el-input type="text" v-model={this.optionModel[propName]} placeholder={placeholder} clearable/>
         </el-form-item>
       )
     }
@@ -119,15 +119,15 @@ export const createRadioButtonGroupEditor = function (propName, propLabelKey, co
   }
 }
 
-export const createSelectEditor = function (propName, propLabelKey, configs) {
+export const createSelectEditor = function (propName, propLabelKey, configs, placeholder, required) {
   return {
     props: {
       optionModel: Object,
     },
     render(h) {
       return (
-        <el-form-item label={translate(propLabelKey)}>
-          <el-select v-model={this.optionModel[propName]}>
+        <el-form-item label={translate(propLabelKey)}  required={required} >
+          <el-select v-model={this.optionModel[propName]} placeholder={placeholder}>
             {
               configs.optionItems.map(item => {
                 return <el-option label={item.label} value={item.value} />

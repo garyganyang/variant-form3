@@ -13,3 +13,54 @@ body {
   text-rendering: optimizeLegibility;
   font-family: Helvetica Neue, Helvetica, PingFang SC, Hiragino Sans GB, Microsoft YaHei, Arial, sans-serif;
 }
+
+/* tailwindcss_like start */
+.flex {
+  display: flex;
+}
+
+.relative {
+  position: relative;
+}
+
+.w-full {
+  width: 100%;
+}
+
+.absolute {
+  position: absolute;
+}
+
+.items-start {
+  align-items: flex-start;
+}
+
+.items-end {
+  align-items: flex-end;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.top-2 {
+  top: 0.5rem; /* 8px */
+}
+
+.right-3 {
+  right: 0.75rem; /* 12px */
+}
+
+.gap-4 {
+  gap: 1rem; /* 16px */
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.border {
+  border: 1px solid #ddd;
+}
+
+/* tailwindcss_like end */

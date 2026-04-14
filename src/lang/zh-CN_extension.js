@@ -4,7 +4,8 @@ export default {
             card: '卡片',
             alert: '提示',
             'location-picker': '地图选点',
-            'el-table': '数据表格',
+            'el-table': 'el-table',
+            'ace-editor': 'ace-editor',
         },
 
         setting: {
@@ -30,6 +31,9 @@ export default {
             columnList: '表格列编辑',
             actionList: '操作列编辑',
             actionColumnFixedWidth: '操作列宽度',
+            aceEditorLang: '编辑器语言',
+            aceEditorTheme: '编辑器主题',
+            aceEditorFontSize: '编辑器字体大小',
         },
 
     }
