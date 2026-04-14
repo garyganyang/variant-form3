@@ -1,14 +1,14 @@
 import {translate} from "@/utils/i18n"
 import emitter from '@/utils/emitter'
 
-export const createInputTextEditor = function (propName, propLabelKey, placehodler) {
+export const createInputTextEditor = function (propName, propLabelKey, placehodler, required) {
   return {
     props: {
       optionModel: Object,
     },
     render(h) {
       return (
-        <el-form-item label={translate(propLabelKey)}>
+        <el-form-item label={translate(propLabelKey)}  required={required} >
           <el-input type="text" v-model={this.optionModel[propName]} placeholder={placehodler} clearable/>
         </el-form-item>
       )

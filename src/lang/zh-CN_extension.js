@@ -23,6 +23,7 @@ export default {
             effect: '显示效果',
 
             locationPickerTitle: '天地图标题',
+            tdtKey: "天地图key",
             tableHeight: "表格高度",
             border: "边框",
             advanced: '高级',

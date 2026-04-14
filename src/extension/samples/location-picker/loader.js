@@ -37,8 +37,8 @@ export const loadLocationPickerWidget = (app) => {
     //     PEFactory.createSelectEditor('type', 'extension.setting.alertType',
     //         {optionItems: typeOptions}))
     //
-    // PERegister.registerCPEditor(app, 'alert-description', 'alert-description-editor',
-    //     PEFactory.createInputTextEditor('description', 'extension.setting.description'))
+    PERegister.registerCPEditor(app, 'tdtKey', 'tdtKey-editor',
+        PEFactory.createInputTextEditor('tdtKey', 'extension.setting.tdtKey', '天地图key', true))
     //
     // PERegister.registerCPEditor(app, 'alert-closable', 'alert-closable-editor',
     //     PEFactory.createBooleanEditor('closable', 'extension.setting.closable'))

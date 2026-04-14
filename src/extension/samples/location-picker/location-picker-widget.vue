@@ -11,14 +11,13 @@
     <el-input v-model="fieldModel.address"
               :disabled="true"
               :placeholder="field.options.placeholder"
-              class="input-with-select"
-    >
+              class="input-with-select">
       <!--      :disabled="field.options.disabled"-->
       <template #append>
         <el-button :icon="Search" :disabled="field.options.disabled" @click="openTheDialog()"/>
       </template>
     </el-input>
-    <map-dialog ref="mapDialogRef" tdt-key="b67f3a716250c0feb8b4677a4454a20e" @on-confirm="onMapConfirm"/>
+    <map-dialog ref="mapDialogRef" :tdt-key="field.options.tdtKey" @on-confirm="onMapConfirm"/>
   </form-item-wrapper>
 </template>
 
@@ -116,7 +115,7 @@ export default {
 //.full-width-input {
 //  width: 100% !important;
 //}
-:deep(.el-input.is-disabled .el-input__wrapper){
+:deep(.el-input.is-disabled .el-input__wrapper) {
   background-color: inherit;
   box-shadow: 0 0 0 1px var(--el-input-border-color, var(--el-border-color)) inset;
 }

@@ -5,9 +5,9 @@ export const mySchema = {
     options: {
         name: '',
         label: '地点',
-        mapKey: '',
         labelAlign: '',
         defaultValue: '',
+        tdtKey: 'b67f3a716250c0feb8b4677a4454a20e',
         placeholder: '请从地图上选择',
         labelWidth: null,
         labelHidden: false,
