@@ -351,6 +351,7 @@ export function getQueryParam(variable) {
 export function getDefaultFormConfig() {
     const cssCode = [
         ".flex{display: flex;align-items: center;}",
+        ".flex-1{flex:1}",
         ".ml-8{margin-left:8px;}",
         ".mr-8{margin-right:8px;}",
         ".mt-8{margin-top:8px;}",
@@ -359,6 +360,9 @@ export function getDefaultFormConfig() {
         ".mr-16{margin-right:16px;}",
         ".mt-16{margin-top:16px;}",
         ".mb-16{margin-bottom:16px;}",
+        ".text-center{text-align:center}",
+        ".text-right{text-align:right}",
+        ".w-full{width:100%}",
         ".w-full{width:100%}",
         ".h-full{height:100%}",
     ].join("\n")
@@ -371,7 +375,6 @@ export function getDefaultFormConfig() {
         labelPosition: 'left',
         size: '',
         labelAlign: 'label-right-align',
-        // cssCode: '.flex{display: flex;}\n.ml-8{margin-left:8px;}\n\\n.\n.ml-16{margin-left:16px;}\n.mr-16{margin-right:16px;}\n.mt-16{margin-top:16px;}\n.mb-16{margin-bottom:16px;}',
         cssCode,
         customClass: [],
         functions: '',  //全局函数

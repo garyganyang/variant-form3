@@ -67,17 +67,11 @@
           <span><svg-icon icon-class="el-form-template" /> {{i18nt('designer.formLib')}}</span>
         </template>
 
-        <template v-for="(ft, idx) in formTemplates">
+        <template v-for="(each, idx) in formTemplates">
           <el-card :bord-style="{ padding: '0' }" shadow="hover" class="ft-card">
-            <el-popover placement="right" trigger="hover">
-              <template #reference>
-                <img :src="ft.imgUrl" style="width: 200px">
-              </template>
-              <img :src="ft.imgUrl" style="height: 600px;width: 720px">
-            </el-popover>
             <div class="bottom clear-fix">
-              <span class="ft-title">#{{idx+1}} {{ft.title}}</span>
-              <el-button link type="primary" class="right-button" @click="loadFormTemplate(ft.jsonUrl)">
+              <div class="ft-title">#{{idx+1}} {{each.title}}</div>
+              <el-button link type="primary" class="" @click="loadFormTemplateMetadata(each.metadata)">
                 {{i18nt('designer.hint.loadFormTemplate')}}</el-button>
             </div>
           </el-card>
@@ -245,8 +239,23 @@
       addFieldByDbClick(widget) {
         this.designer.addFieldByDbClick(widget)
       },
-
-      loadFormTemplate(jsonUrl) {
+      loadFormTemplateMetadata(metadata) {
+        this.$confirm(
+            this.i18nt('designer.hint.loadFormTemplateHint'),
+            this.i18nt('render.hint.prompt'),
+            {
+              confirmButtonText: this.i18nt('render.hint.confirm'),
+              cancelButtonText: this.i18nt('render.hint.cancel')
+            }
+        ).then(() => {
+          const modifiedFlag = this.designer.loadFormJson(metadata)
+          if (modifiedFlag) this.designer.emitHistoryChange()
+          this.$message.success(this.i18nt('designer.hint.loadFormTemplateSuccess'))
+        }).catch(error => {
+          this.$message.error(this.i18nt('designer.hint.loadFormTemplateFailed') + ':' + error)
+        })
+      },
+      loadFormTemplateUrl(jsonUrl) {
         this.$confirm(this.i18nt('designer.hint.loadFormTemplateHint'), this.i18nt('render.hint.prompt'), {
           confirmButtonText: this.i18nt('render.hint.confirm'),
           cancelButtonText: this.i18nt('render.hint.cancel')
