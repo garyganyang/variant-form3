@@ -104,7 +104,12 @@ export default {
     },
     onMapConfirm(data) {
       this.fieldModel = data
-    }
+      this.handleChangeEvent()
+    },
+    handleChangeEvent() {
+      console.log("handleChangeEvent")
+      this.syncUpdateFormModel(this.fieldModel)
+    },
   }
 }
 </script>
