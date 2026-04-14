@@ -9,31 +9,34 @@
 -->
 
 <template>
-  <el-form :label-position="labelPosition" :size="size" :class="[customClass]" class="render-form"
-           :label-width="labelWidth" :validate-on-rule-change="false"
-           :model="formDataModel" ref="renderForm"
-           @submit.prevent>
-    <template v-for="(widget, index) in widgetList">
-      <template v-if="'container' === widget.category">
-        <component :is="getContainerWidgetName(widget)" :widget="widget" :key="widget.id" :parent-list="widgetList"
+  <div>
+    <el-form :label-position="labelPosition" :size="size" :class="[customClass]" class="render-form"
+             :label-width="labelWidth" :validate-on-rule-change="false"
+             :model="formDataModel" ref="renderForm"
+             @submit.prevent>
+      <template v-for="(widget, index) in widgetList">
+        <template v-if="'container' === widget.category">
+          <component :is="getContainerWidgetName(widget)" :widget="widget" :key="widget.id" :parent-list="widgetList"
+                          :index-of-parent-list="index" :parent-widget="null">
+            <!-- 递归传递插槽！！！ -->
+            <template v-for="slot in Object.keys($slots)" v-slot:[slot]="scope">
+              <slot :name="slot" v-bind="scope"/>
+            </template>
+          </component>
+        </template>
+        <template v-else>
+          <component :is="getWidgetName(widget)" :field="widget" :form-model="formDataModel" :designer="null" :key="widget.id" :parent-list="widgetList"
                         :index-of-parent-list="index" :parent-widget="null">
-          <!-- 递归传递插槽！！！ -->
-          <template v-for="slot in Object.keys($slots)" v-slot:[slot]="scope">
-            <slot :name="slot" v-bind="scope"/>
-          </template>
-        </component>
+            <!-- 递归传递插槽！！！ -->
+            <template v-for="slot in Object.keys($slots)" v-slot:[slot]="scope">
+              <slot :name="slot" v-bind="scope"/>
+            </template>
+          </component>
+        </template>
       </template>
-      <template v-else>
-        <component :is="getWidgetName(widget)" :field="widget" :form-model="formDataModel" :designer="null" :key="widget.id" :parent-list="widgetList"
-                      :index-of-parent-list="index" :parent-widget="null">
-          <!-- 递归传递插槽！！！ -->
-          <template v-for="slot in Object.keys($slots)" v-slot:[slot]="scope">
-            <slot :name="slot" v-bind="scope"/>
-          </template>
-        </component>
-      </template>
-    </template>
-  </el-form>
+    </el-form>
+    <customized-dialog-components ref="customizedDialogRef"/>
+  </div>
 </template>
 
 <script>
@@ -46,6 +49,7 @@
     getAllFieldWidgets, traverseFieldWidgets, buildDefaultFormJson
   } from "@/utils/util"
   import i18n, { changeLocale } from "@/utils/i18n"
+  import CustomizedDialogComponents from "@/components/form-designer/a-customized-dialog/index.vue";
 
   export default {
     name: "VFormRender",
@@ -53,8 +57,8 @@
     mixins: [emitter, i18n],
     components: {
       //ElForm,
-
       ...FieldComponents,
+      CustomizedDialogComponents,
     },
     props: {
       formJson: { //prop传入的表单JSON配置
@@ -165,6 +169,7 @@
         this.addFieldChangeEventHandler()
         this.addFieldValidateEventHandler()
         this.registerFormToRefList()
+        this.registerCustomizedDialog()
         this.handleOnCreated()
       },
 
@@ -710,7 +715,12 @@
       },
 
       //--------------------- 以上为组件支持外部调用的API方法 end ------------------//
-
+      registerCustomizedDialog() {
+        this.$nextTick(() => {
+          this.widgetRefList['customizedDialog'] = this.$refs.customizedDialogRef
+        })
+      },
+      // --------------------- 自定义 内容 end   ------------------//
     },
   }
 </script>

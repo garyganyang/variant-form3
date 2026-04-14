@@ -616,8 +616,17 @@ export default {
         this.field.options.customClass.splice(foundIdx, 1)
       }
     },
-
     //--------------------- 以上为组件支持外部调用的API方法 end ------------------//
 
+    // --------------------- 自定义API start ------------------//
+    // 弹窗
+    showCustomizedDialog(options, param, data, callback) {
+      this.refList['customizedDialog'].showDialog(options, param, data, callback, this.getFormRef())
+    },
+    hideCustomizedDialog(callbackFn, extraData) {
+      // this.refList['customizedDialog'].hideDialog(options, param, data, callback, this.getFormRef())
+      this.dispatch('VFormRender', 'hideDialog', [this, callbackFn, extraData])
+    },
+    // --------------------- cjie自定义API start ------------------//
   }
 }

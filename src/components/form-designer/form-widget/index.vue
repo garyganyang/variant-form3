@@ -28,13 +28,14 @@
       </div>
 
     </el-form>
-
+    <customized-dialog-components ref="customizedDialogRef"/>
   </div>
 </template>
 
 <script>
   import '@/components/form-designer/form-widget/container-widget/index'
   import FieldComponents from '@/components/form-designer/form-widget/field-widget/index'
+  import CustomizedDialogComponents from '@/components/form-designer/a-customized-dialog/index'
   import i18n from "@/utils/i18n"
 
   export default {
@@ -43,6 +44,7 @@
     mixins: [i18n],
     components: {
       ...FieldComponents,
+      CustomizedDialogComponents
     },
     props: {
       designer: Object,
@@ -120,6 +122,7 @@
     created() {
       this.designer.initDesigner( !!this.getDesignerConfig().resetFormJson );
       this.designer.loadPresetCssCode( this.getDesignerConfig().presetCssCode )
+      this.registerCustomizedDialog() // 自定义相关内容
     },
     mounted() {
       this.disableFirefoxDefaultDrop()  /* 禁用Firefox默认拖拽搜索功能!! */
@@ -187,7 +190,13 @@
       deleteWidgetRef(widgetRefName) {
         delete this.widgetRefList[widgetRefName]
       },
-
+      // --------------------- 自定义 内容 start ------------------//
+      registerCustomizedDialog() {
+        this.$nextTick(() => {
+          this.widgetRefList['customizedDialog'] = this.$refs.customizedDialogRef
+        })
+      },
+      // --------------------- 自定义 内容 end   ------------------//
     }
   }
 </script>

@@ -15,6 +15,7 @@ export function addDirective(app) {
         const dragDom = document.querySelector(binding.value[0])
         const dragHeader = document.querySelector(binding.value[1])
 
+        if(!dragHeader) return // 加了个判断, 避免报错
         dragHeader.onmouseover = () => (dragHeader.style.cursor = `move`);
 
         function down(e, type) {
