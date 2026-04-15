@@ -6,6 +6,7 @@ export default {
             'location-picker': '地图选点',
             'el-table': 'el-table',
             'ace-editor': 'ace-editor',
+            'el-tree': 'el-tree',
         },
 
         setting: {
@@ -28,12 +29,29 @@ export default {
             tableHeight: "表格高度",
             border: "边框",
             advanced: '高级',
+
             columnList: '表格列编辑',
             actionList: '操作列编辑',
             actionColumnFixedWidth: '操作列宽度',
+
             aceEditorLang: '编辑器语言',
             aceEditorTheme: '编辑器主题',
             aceEditorFontSize: '编辑器字体大小',
+
+            elTree_props: '配置选项',
+            elTree_props_str: '配置选项',
+            elTree_node_key: '唯一标识属性', // 每个树节点用来作为唯一标识的属性，整棵树应该是唯一的
+            elTree_empty_text: '空文本',
+            elTree_render_after_expand: '节点延后渲染',
+            elTree_highlight_current: '选中高亮',
+            elTree_default_expand_all: '默认展开所有',
+            elTree_expand_on_click_node: '点击后展开',
+            elTree_show_checkbox: '可被选择',
+            elTree_accordion: '同级展开',
+            elTree_indent: '水平缩进',
+            elTree_icon: '树节点图标',
+            elTree_draggable: '节点拖拽',
+            elTree_onNodeClick: 'onNodeClick',
         },
 
     }
