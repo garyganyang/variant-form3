@@ -18,6 +18,7 @@ import {loadLocationPickerWidget} from '@/extension/samples/location-picker/load
 import {loadElTableWidget} from '@/extension/samples/el-table/loader'
 import {loadAceEditorWidget} from '@/extension/samples/ace-editor/loader'
 import {loadElTreeWidget} from '@/extension/samples/el-tree/loader'
+import {loadElTreeSelectWidget} from '@/extension/samples/el-tree-select/loader'
 
 
 export const loadExtension = function (app) {
@@ -26,6 +27,7 @@ export const loadExtension = function (app) {
     loadElTableWidget(app) //  el-table 组件
     loadAceEditorWidget(app) // ace editor 组件
     loadElTreeWidget(app) // el-tree 组件
+    loadElTreeSelectWidget(app) // el-tree-select 组件
     /**
      * 加载容器组件步骤：
      * 1. 加载组件Json Schema;

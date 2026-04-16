@@ -7,6 +7,7 @@ export default {
             'el-table': 'el-table',
             'ace-editor': 'ace-editor',
             'el-tree': 'el-tree',
+            'el-tree-select': 'el-tree-select',
         },
 
         setting: {
@@ -51,6 +52,8 @@ export default {
             elTree_indent: '水平缩进',
             elTree_icon: '树节点图标',
             elTree_draggable: '节点拖拽',
+            elTree_check_strictly: "任意节点可选",
+            elTree_multiple: "可多选",
             elTree_onNodeClick: 'onNodeClick',
         },
 
