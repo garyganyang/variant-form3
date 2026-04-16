@@ -8,6 +8,7 @@ export default {
             'ace-editor': 'ace-editor',
             'el-tree': 'el-tree',
             'el-tree-select': 'el-tree-select',
+            'el-statistic': '统计组件',
         },
 
         setting: {
@@ -55,6 +56,11 @@ export default {
             elTree_check_strictly: "任意节点可选",
             elTree_multiple: "可多选",
             elTree_onNodeClick: 'onNodeClick',
+
+            elStatistic_title: '数字标题',
+            elStatistic_prefix: '数字前缀',
+            elStatistic_suffix: '数字后缀',
+            elStatistic_precision: "数字精度",
         },
 
     }

@@ -19,6 +19,7 @@ import {loadElTableWidget} from '@/extension/samples/el-table/loader'
 import {loadAceEditorWidget} from '@/extension/samples/ace-editor/loader'
 import {loadElTreeWidget} from '@/extension/samples/el-tree/loader'
 import {loadElTreeSelectWidget} from '@/extension/samples/el-tree-select/loader'
+import {loadElStatisticWidget} from '@/extension/samples/el-statistic/loader'
 
 
 export const loadExtension = function (app) {
@@ -28,6 +29,7 @@ export const loadExtension = function (app) {
     loadAceEditorWidget(app) // ace editor 组件
     loadElTreeWidget(app) // el-tree 组件
     loadElTreeSelectWidget(app) // el-tree-select 组件
+    loadElStatisticWidget(app) // el-statistic 组件
     /**
      * 加载容器组件步骤：
      * 1. 加载组件Json Schema;
