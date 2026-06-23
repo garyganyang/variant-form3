@@ -306,6 +306,7 @@ export default {
       deleteEntireRow: 'delete entire row',
 
       widgetName: 'Unique Name',
+      formUniqueId: 'UniqueId',
       formSize: 'Size',
       labelPosition: 'Position Of Label',
       topPosition: 'Top',

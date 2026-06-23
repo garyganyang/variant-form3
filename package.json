@@ -5,12 +5,13 @@
   "scripts": {
     "serve": "vite",
     "build": "vite build",
-    "lib": "vite build --config vite-lib.config.js",
+    "lib": "vite build --config vite-lib.config.js && node post-install.js ",
     "lib-render": "vite build --config vite-lib-render.config.js",
     "preview": "vite preview"
   },
   "dependencies": {
     "@element-plus/icons-vue": "^2.3.1",
+    "@vueuse/core": "^14.2.1",
     "ace-builds": "^1.43.2",
     "axios": "^1.13.5",
     "clipboard": "^2.0.8",

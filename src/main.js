@@ -1,5 +1,7 @@
 import { createApp } from 'vue'
 import axios from 'axios'
+import axiosInstance from '@/axios/axiosInstance'
+import { $localStorage } from "@/axios/application-storage.js";
 import App from './App.vue'
 import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
@@ -18,6 +20,8 @@ import { loadExtension } from '@/extension/extension-loader'
 
 if (typeof window !== 'undefined') {
   window.axios = axios
+  window.$axios = axiosInstance
+  window.$localStorage = $localStorage
 }
 
 const vfApp = createApp(App)

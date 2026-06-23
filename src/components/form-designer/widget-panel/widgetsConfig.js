@@ -766,7 +766,7 @@ export const advancedFields = [
       customRule: '',
       customRuleHint: '',
       //-------------------
-      uploadURL: '/epms2-api/xfjy/api/epms/file/upload',
+      uploadURL: '/epms2-api/{{tenantCode}}/api/epms/file/upload',
       uploadTip: '',
       withCredentials: true,
       multipleSelect: false,
@@ -782,9 +782,9 @@ export const advancedFields = [
       labelTooltip: null,
       //-------------------
       onCreated: '',
-      onMounted: 'this.uploadHeaders = {Authorization: `Bearer ${JSON.parse(localStorage.getItem("E-o-token")).content}` }',
+      "onMounted": "const token = localStorage.getItem(\"E-o-token\");\nif(token){\n  this.uploadHeaders = {Authorization: `Bearer ${JSON.parse(token).content}`};\n}else{\n  this.uploadHeaders = {Authorization: `Bearer noToken`};\n}\n",
       onBeforeUpload: '',
-      onUploadSuccess: '',
+      "onUploadSuccess": "const {objectOriginName, url} = result.data\nconst {raw} = file\nreturn {name:objectOriginName, url, raw}",
       onUploadError: '',
       onFileRemove: '',
       onValidate: '',
@@ -811,14 +811,14 @@ export const advancedFields = [
       customRule: '',
       customRuleHint: '',
       //-------------------
-      uploadURL: '/epms2-api/xfjy/api/epms/file/upload',
+      uploadURL: '/epms2-api/{{tenantCode}}/api/epms/file/upload',
       uploadTip: '',
       withCredentials: true,
       multipleSelect: false,
       showFileList: true,
       limit: 3,
       fileMaxSize: 5, //MB
-      fileTypes: ['doc', 'docx', 'xls', 'xlsx'],
+      fileTypes: ['doc', 'docx', 'xls', 'xlsx', 'pdf', 'ppt', 'pptx', 'txt', 'log'],
       //headers: [],
       //-------------------
       customClass: '',  //自定义css类名
@@ -827,9 +827,9 @@ export const advancedFields = [
       labelTooltip: null,
       //-------------------
       onCreated: '',
-      onMounted: 'this.uploadHeaders = {Authorization: `Bearer ${JSON.parse(localStorage.getItem("E-o-token")).content}` }',
+      "onMounted": "const token = localStorage.getItem(\"E-o-token\");\nif(token){\n  this.uploadHeaders = {Authorization: `Bearer ${JSON.parse(token).content}`};\n}else{\n  this.uploadHeaders = {Authorization: `Bearer noToken`};\n}\n",
       onBeforeUpload: '',
-      onUploadSuccess: '',
+      "onUploadSuccess": "const {objectOriginName, url} = result.data\nconst {raw} = file\nreturn {name:objectOriginName, url, raw}",
       onUploadError: '',
       onFileRemove: '',
       onValidate: '',

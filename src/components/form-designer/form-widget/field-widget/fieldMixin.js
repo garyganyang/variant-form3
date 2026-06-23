@@ -1,6 +1,7 @@
 import {deepClone} from "@/utils/util"
 import FormValidators from '@/utils/validators'
 import eventBus from "@/utils/event-bus"
+import {debounce} from 'lodash'
 
 export default {
   inject: ['refList', 'getFormConfig', 'getGlobalDsv', 'globalOptionData', 'globalModel', 'getOptionData'],
@@ -49,9 +50,7 @@ export default {
 
       if (!!this.subFormItemFlag && !this.designState) {  //SubForm子表单组件需要特殊处理！！
         let subFormData = this.formModel[this.subFormName]
-        if (((subFormData === undefined) || (subFormData[this.subFormRowIndex] === undefined) ||
-            (subFormData[this.subFormRowIndex][this.field.options.name] === undefined)) &&
-            (this.field.options.defaultValue !== undefined)) {
+        if (((subFormData === undefined) || (subFormData[this.subFormRowIndex] === undefined) || (subFormData[this.subFormRowIndex][this.field.options.name] === undefined)) && (this.field.options.defaultValue !== undefined)) {
           this.fieldModel = this.field.options.defaultValue
           subFormData[this.subFormRowIndex][this.field.options.name] = this.field.options.defaultValue
         } else if (subFormData[this.subFormRowIndex][this.field.options.name] === undefined) {
@@ -72,8 +71,7 @@ export default {
         return
       }
 
-      if ((this.formModel[this.field.options.name] === undefined) &&
-          (this.field.options.defaultValue !== undefined)) {
+      if ((this.formModel[this.field.options.name] === undefined) && (this.field.options.defaultValue !== undefined)) {
         this.fieldModel = this.field.options.defaultValue
       } else if (this.formModel[this.field.options.name] === undefined) {  //如果formModel为空对象，则初始化字段值为null!!
         this.formModel[this.field.options.name] = null
@@ -85,10 +83,7 @@ export default {
     },
 
     initFileList() { //初始化上传组件的已上传文件列表
-      if ( ((this.field.type !== 'picture-upload') && (this.field.type !== 'file-upload')) || (this.designState === true) ) {
-        return
-      }
-
+      if (((this.field.type !== 'picture-upload') && (this.field.type !== 'file-upload')) || (this.designState === true)) return
       if (!!this.fieldModel) {
         if (Array.isArray(this.fieldModel)) {
           this.fileList = deepClone(this.fieldModel)
@@ -169,8 +164,7 @@ export default {
         return
       }
 
-      if ((this.field.type === 'radio') || (this.field.type === 'checkbox')
-          || (this.field.type === 'select') || (this.field.type === 'cascader')) {
+      if ((this.field.type === 'radio') || (this.field.type === 'checkbox') || (this.field.type === 'select') || (this.field.type === 'cascader')) {
         /* 异步更新option-data之后globalOptionData不能获取到最新值，改用provide的getOptionData()方法 */
         const newOptionItems = this.getOptionData()
         if (!!newOptionItems && newOptionItems.hasOwnProperty(this.field.options.name)) {
@@ -234,7 +228,7 @@ export default {
 
       if (!!this.field.options.onValidate) {
         let customFn = (rule, value, callback) => {
-          let tmpFunc =  new Function('rule', 'value', 'callback', this.field.options.onValidate)
+          let tmpFunc = new Function('rule', 'value', 'callback', this.field.options.onValidate)
           return tmpFunc.call(this, rule, value, callback)
         }
         this.rules.push({
@@ -304,8 +298,7 @@ export default {
       this.emit$('field-value-changed', [newValue, oldValue])
 
       /* 必须用dispatch向指定父组件派发消息！！ */
-      this.dispatch('VFormRender', 'fieldChange',
-          [this.field.options.name, newValue, oldValue, this.subFormName, this.subFormRowIndex])
+      this.dispatch('VFormRender', 'fieldChange', [this.field.options.name, newValue, oldValue, this.subFormName, this.subFormRowIndex])
     },
 
     syncUpdateFormModel(value) {
@@ -404,6 +397,16 @@ export default {
       }
     },
 
+    // 生成防抖函数：300ms延迟，立即执行一次
+    handleButtonWidgetClickDebounce: debounce(function () {
+        this.handleButtonWidgetClick() // function内部this自动指向组件实例
+      },
+      300, {
+        leading: true,   // 点击立刻执行一次
+        trailing: false  // ,
+      }
+    ),
+
     remoteQuery(keyword) {
       if (!!this.field.options.onRemoteQuery) {
         let remoteFn = new Function('keyword', this.field.options.onRemoteQuery)
@@ -439,7 +442,8 @@ export default {
     setValue(newValue) {
       /* if ((this.field.type === 'picture-upload') || (this.field.type === 'file-upload')) {
         this.fileList = newValue
-      } else */ if (!!this.field.formItemFlag) {
+      } else */
+      if (!!this.field.formItemFlag) {
         let oldValue = deepClone(this.fieldModel)
         this.fieldModel = newValue
         this.initFileList()
@@ -450,11 +454,11 @@ export default {
     },
 
     getValue() {
-      /* if ((this.field.type === 'picture-upload') || (this.field.type === 'file-upload')) {
-        return this.fileList
-      } else */ {
-        return this.fieldModel
-      }
+      // if ((this.field.type === 'picture-upload') || (this.field.type === 'file-upload')) {
+      //   return this.fileList
+      // } else {
+      return this.fieldModel
+      // }
     },
 
     resetField() {
@@ -520,12 +524,8 @@ export default {
     },
 
     clearSelectedOptions() {  //清空已选选项
-      if ((this.field.type !== 'checkbox') && (this.field.type !== 'radio') && (this.field.type !== 'select')) {
-        return
-      }
-
-      if ((this.field.type === 'checkbox') ||
-          ((this.field.type === 'select') && this.field.options.multiple)) {
+      if ((this.field.type !== 'checkbox') && (this.field.type !== 'radio') && (this.field.type !== 'select')) return
+      if ((this.field.type === 'checkbox') || ((this.field.type === 'select') && this.field.options.multiple)) {
         this.fieldModel = []
       } else {
         this.fieldModel = ''
@@ -627,6 +627,9 @@ export default {
       // this.refList['customizedDialog'].hideDialog(options, param, data, callback, this.getFormRef())
       this.dispatch('VFormRender', 'hideDialog', [this, callbackFn, extraData])
     },
+    setLoading(state) {
+      this.field.options.loading = state
+    }
     // --------------------- cjie自定义API start ------------------//
   }
 }

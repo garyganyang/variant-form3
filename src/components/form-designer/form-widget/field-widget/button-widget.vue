@@ -6,7 +6,8 @@
                :plain="field.options.plain" :round="field.options.round"
                :circle="field.options.circle" :icon="field.options.icon"
                :disabled="field.options.disabled"
-               @click="handleButtonWidgetClick">
+               :loading="field.options.loading"
+               @click="handleButtonWidgetClickDebounce">
       {{field.options.label}}</el-button>
   </static-content-wrapper>
 </template>

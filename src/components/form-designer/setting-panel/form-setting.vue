@@ -8,10 +8,16 @@
 
 
         <el-collapse-item name="1" :title="i18nt('designer.setting.basicSetting')">
+          <el-form-item :label="i18nt('designer.setting.formUniqueId')">
+            <el-input type="text" v-model="formConfig.formUniqueId" disabled :placeholder="i18nt('designer.setting.formUniqueId')">
+              <template #append>
+                <el-button :icon="Refresh" @click="generateUniqueFormId" />
+              </template>
+            </el-input>
+          </el-form-item>
           <el-form-item :label="i18nt('designer.setting.formSize')">
             <el-select v-model="formConfig.size">
-              <el-option v-for="item in formSizes" :key="item.value" :label="item.label"
-                         :value="item.value">
+              <el-option v-for="item in formSizes" :key="item.value" :label="item.label" :value="item.value">
               </el-option>
             </el-select>
           </el-form-item>
@@ -142,10 +148,15 @@
   import CodeEditor from '@/components/code-editor/index'
   import {deepClone, insertCustomCssToHead, insertGlobalFunctionsToHtml} from "@/utils/util"
   import ToolbarPanel from "@/components/form-designer/toolbar-panel/index.vue";
-  import {CircleCloseFilled} from "@element-plus/icons-vue";
+  import {CircleCloseFilled, Refresh} from "@element-plus/icons-vue";
 
   export default {
     name: "form-setting",
+    computed: {
+      Refresh() {
+        return Refresh
+      }
+    },
     mixins: [i18n],
     components: {
       CircleCloseFilled,
@@ -208,6 +219,7 @@
         insertCustomCssToHead(this.formCssCode)
         this.extractCssClass()
         this.designer.emitEvent('form-css-updated', deepClone(this.cssClassList))
+        // this.generateUniqueFormId()
       }, 1200)
     },
     methods: {
@@ -324,6 +336,12 @@
         this.formConfig[this.curEventName] = this.formEventHandlerCode
         this.showFormEventDialogFlag = false
       },
+      generateUniqueFormId() {
+        // 0 ~ 99999
+        const num = Math.floor(Math.random() * 100000)
+        // 补零到5位字符串
+        this.formConfig.formUniqueId = 'form' + num.toString().padStart(5, '0')
+      }
 
     }
   }

@@ -8,7 +8,7 @@
     <!--              :show-icon="field.options.showIcon" :effect="field.options.effect" @close="handleCloseCustomEvent"></el-alert>-->
     <!--    :data="field.options.tableData"-->
     <el-table ref="fieldEditor"
-              v-loading="fieldModel.loading"
+              v-loading="field.options.loading"
               :data="fieldModel.data"
               :border="field.options.border"
               :height="field.options.tableHeight? field.options.tableHeight : '300px'"
@@ -211,7 +211,7 @@ export default {
   data() {
     return {
       fieldModel: {
-        loading: false,
+        // loading: false,
         pageSize: 10,
         pageNum: 1,
         totalElements: 0,

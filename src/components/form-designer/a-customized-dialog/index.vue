@@ -61,11 +61,12 @@ import {defineAsyncComponent} from "vue";
 
 export default {
   name: 'customized-dialog',
+  componentName: 'FieldWidget',  //必须固定为FieldWidget，用于接收父级组件的broadcast事件
   components: {
     Close, FullScreen,
     // 选项式API 标准异步组件写法，不会提前初始化、不会被响应式包裹
     VFormRender: defineAsyncComponent(() =>
-        import('@/components/form-render/index.vue') // 按你实际路径改
+      import('@/components/form-render/index.vue') // 按你实际路径改
     )
   },
   // mixins: [emitter, fieldMixin],
@@ -129,7 +130,8 @@ export default {
     },
     hideDialog(params, callbackFn, extraData) {
       if (callbackFn) {
-        const remoteFn = new Function(callbackFn)
+        const {formUniqueId} = this.parentFormRef.formConfig
+        const remoteFn = new Function(formUniqueId + '.' + callbackFn) // 自动加上调用父组件的方法
         remoteFn.call(this)
       }
       if (this.callbackFn) {

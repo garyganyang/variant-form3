@@ -191,12 +191,14 @@
         if (!!customResult && !!customResult.name && !!customResult.url) {
           this.fieldModel.push({
             name: customResult.name,
-            url: customResult.url
+            url: customResult.url,
+            raw: customResult.raw,
           })
         } else if (!!defaultResult && !!defaultResult.name && !!defaultResult.url) {
           this.fieldModel.push({
             name: defaultResult.name,
-            url: defaultResult.url
+            url: defaultResult.url,
+            raw: customResult.raw,
           })
         } else {
           this.fieldModel = deepClone(fileList)

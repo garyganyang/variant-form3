@@ -103,6 +103,7 @@
         formDataModel: {
           //
         },
+        formRawData: {},
 
         widgetRefList: {},
         subFormRefList: {},
@@ -485,18 +486,20 @@
 
         return promise
       },
-
       setFormData(formData) { //设置表单数据
         Object.keys(this.formDataModel).forEach(propName => {
           if (!!formData && formData.hasOwnProperty(propName)) {
             this.formDataModel[propName] = deepClone( formData[propName] )
           }
         })
-
+        this.setFormRawData(formData) // 2026/06/22 新增的, 不破坏原有逻辑, 增加了一个保存原始数据的功能, 以便读取
         // 通知SubForm组件：表单数据更新事件！！
         this.broadcast('ContainerItem', 'setFormData', this.formDataModel)
         // 通知FieldWidget组件：表单数据更新事件！！
         this.broadcast('FieldWidget', 'setFormData', this.formDataModel)
+      },
+      setFormRawData(formData) {
+        this.formRawData = {...formData}
       },
 
       getFieldValue(fieldName) { //单个字段获取值
@@ -715,6 +718,7 @@
       },
 
       //--------------------- 以上为组件支持外部调用的API方法 end ------------------//
+      // --------------------- 自定义 内容 start   ------------------//
       registerCustomizedDialog() {
         this.$nextTick(() => {
           this.widgetRefList['customizedDialog'] = this.$refs.customizedDialogRef

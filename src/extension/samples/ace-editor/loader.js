@@ -42,10 +42,10 @@ export const loadAceEditorWidget = (app) => {
 
     const langOptions = [
         {label: 'JSON', value: 'json'},
-        {label: 'XML', value: 'xml'},
         {label: 'Javascript', value: 'javascript'},
         {label: 'Html', value: 'html'},
         {label: 'SQL', value: 'sql'},
+        {label: 'Java', value: 'java'},
         {label: 'Yaml', value: 'yaml'},
     ]
     PERegister.registerCPEditor(app, 'aceEditorLang', 'aceEditorLang-editor',
