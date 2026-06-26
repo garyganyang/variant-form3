@@ -187,6 +187,7 @@
       },
 
       updateFieldModelAndEmitDataChangeForUpload(fileList, customResult, defaultResult) {
+        if (!this.fieldModel) this.fieldModel = []
         let oldValue = deepClone(this.fieldModel)
         if (!!customResult && !!customResult.name && !!customResult.url) {
           this.fieldModel.push({

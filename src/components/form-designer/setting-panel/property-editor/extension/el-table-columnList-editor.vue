@@ -34,7 +34,8 @@
       <el-table-column prop="displayType" label="展示类型" min-width="140" align="left">
         <template #default="scope">
           <el-select v-model="scope.row.displayType" default-first-option>
-            <el-option label="字符串" value="string"/>
+            <el-option label="普通字符串" value="string"/>
+            <el-option label="SVG字符串" value="svgString"/>
             <el-option label="图片(单张)" value="image"/>
             <el-option label="图片(多张)" value="images"/>
             <el-option label="头像(单张)" value="avatar"/>
@@ -43,6 +44,8 @@
             <el-option label="文件(多个)" value="files"/>
             <el-option label="标签tag(单个)" value="tag"/>
             <el-option label="标签tag(多个)" value="tags"/>
+            <el-option label="JSON数组(显示label)" value="jsonArray"/>
+            <el-option label="JSON对象(显示label)" value="jsonMap"/>
           </el-select>
         </template>
       </el-table-column>
