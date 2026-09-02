@@ -30,7 +30,7 @@
                        :align="each.align"
                        :show-overflow-tooltip="each.showOverflowTooltip">
         <template v-if="each.displayType === 'string'" #default="scope">
-          {{ scope.row[each.prop] }}
+          {{ each.formatter ? stringFormatter(scope.row, each.formatter) : scope.row[each.prop] }}
         </template>
         <template v-if="each.displayType === 'tag'" #default="scope">
           <el-tag :type="getFixedType(scope.row[each.prop])" effect="light"> {{ scope.row[each.prop] }}</el-tag>
@@ -395,6 +395,25 @@ export default {
       const customFn = new Function('row', 'rowIndex', 'btnConfig', btnConfig.isHiddenButton)
       return customFn.call(this, row, index, btnConfig)
     },
+    stringFormatter(row, expr) {
+      if (!expr) return ''
+      try {
+        // 把row作为上下文，执行表达式
+        const fn = new Function('row', `
+      try {
+        with(row) {
+          return (${expr})
+        }
+      } catch(err) {
+        return null
+      }
+    `)
+        const val = fn(row)
+        return val ?? '--'
+      } catch (e) {
+        return '--'
+      }
+    }
   }
 }
 </script>

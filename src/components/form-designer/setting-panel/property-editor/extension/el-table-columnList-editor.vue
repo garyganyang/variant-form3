@@ -16,7 +16,7 @@
               :border="true"
               height="100%">
       <el-table-column type="index" width="60px" label="序号" fixed="left" align="center"/>
-      <el-table-column prop="prop" label="排序号" fixed="left" align="left" min-width="120px">
+      <el-table-column prop="prop" label="排序号" fixed="left" align="center" width="100px">
         <template #default="scope">
           <el-input-number v-model="scope.row.seq" :min="0" placeholder="" style="width: 100%"/>
         </template>
@@ -26,12 +26,29 @@
           <el-input v-model="scope.row.prop" placeholder="请输入对应字段(数据库表字段)"/>
         </template>
       </el-table-column>
-      <el-table-column prop="label" label="显示名称" fixed="left" align="left" min-width="160">
+      <el-table-column prop="label" label="显示名称" fixed="left" align="left" width="160">
         <template #default="scope">
           <el-input v-model="scope.row.label" placeholder="请输入表头名称"/>
         </template>
       </el-table-column>
-      <el-table-column prop="displayType" label="展示类型" min-width="140" align="left">
+      <el-table-column prop="formatter" label="格式化表达式" align="left" min-width="160">
+        <template #header="{}">
+          <span class="mr-2">格式化表达式</span>
+          <el-popover placement="top-start"
+                      width="400"
+                      content="一段js代码, 如: field.map(e=>e.name).join(',')。当前仅支持已普通字符串展示">
+            <template #reference>
+              <el-icon>
+                <QuestionFilled /><!-- eslint-disable-line vue/component-name-in-template-casing -->
+              </el-icon>
+            </template>
+          </el-popover>
+        </template>
+        <template #default="scope">
+          <el-input v-model="scope.row.formatter" placeholder="请输入formatter"/>
+        </template>
+      </el-table-column>
+      <el-table-column prop="displayType" label="展示类型" width="150" align="left">
         <template #default="scope">
           <el-select v-model="scope.row.displayType" default-first-option>
             <el-option label="普通字符串" value="string"/>
@@ -49,27 +66,27 @@
           </el-select>
         </template>
       </el-table-column>
-      <el-table-column prop="width" label="最小列宽(px)" min-width="120" align="left">
+      <el-table-column prop="width" label="最小列宽(px)" width="120" align="left">
         <template #default="scope">
           <el-input v-model="scope.row.minWidth" placeholder="请输入"/>
         </template>
       </el-table-column>
-      <el-table-column prop="isShow" label="是否显示" min-width="120" align="center">
+      <el-table-column prop="isShow" label="是否显示" width="100px" align="center">
         <template #default="scope">
           <el-switch v-model="scope.row.isShow"/>
         </template>
       </el-table-column>
-      <el-table-column prop="sortable" label="可排序" min-width="120" align="center">
+      <el-table-column prop="sortable" label="可排序" width="100px" align="center">
         <template #default="scope">
           <el-switch v-model="scope.row.sortable"/>
         </template>
       </el-table-column>
-      <el-table-column prop="showOverflowTooltip" label="隐藏过长内容" min-width="120" align="center">
+      <el-table-column prop="showOverflowTooltip" label="隐藏过长内容" width="110px" align="center">
         <template #default="scope">
           <el-switch v-model="scope.row.showOverflowTooltip"/>
         </template>
       </el-table-column>
-      <el-table-column prop="fixed" label="是否固定" min-width="120" align="center">
+      <el-table-column prop="fixed" label="是否固定" width="110" align="center">
         <template #default="scope">
           <el-select v-model="scope.row.fixed" default-first-option>
             <el-option value="noFixed" label="不固定"></el-option>
@@ -78,7 +95,7 @@
           </el-select>
         </template>
       </el-table-column>
-      <el-table-column prop="align" label="对齐方式" min-width="120" align="left">
+      <el-table-column prop="align" label="对齐方式" width="120" align="left">
         <template #default="scope">
           <el-select v-model="scope.row.align" default-first-option>
             <el-option value="left" label="左对齐"/>
@@ -87,7 +104,7 @@
           </el-select>
         </template>
       </el-table-column>
-      <el-table-column label="操作" fixed="right" align="center" min-width="120">
+      <el-table-column label="操作" fixed="right" align="center" width="100">
         <template #default="scope">
           <el-button circle icon="el-icon-plus" @click="addRow(scope.$index)"/>
           <el-button circle icon="el-icon-minus" @click="deleteRow(scope.$index)"/>
@@ -104,9 +121,11 @@
 </template>
 <script>
 import {orderBy} from "lodash";
+import {QuestionFilled} from "@element-plus/icons-vue";
 
 export default {
   name: 'el-table-columnList-editor',
+  components: {QuestionFilled},
   props: {
     designer: Object,
     selectedWidget: Object,
