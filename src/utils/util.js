@@ -63,7 +63,18 @@ const createStyleSheet = function () {
     return style.sheet;
 }
 
+const scopeVFormCss = function (rawCss, nsClass) {
+    // 简单正则，给每个选择器组前插入命名空间前缀
+    const reg = /([^{]+)\{/g
+    return rawCss.replace(reg, (match, selectorGroup) => {
+        const sel = selectorGroup.trim()
+        if(!sel) return match
+        return `${nsClass} ${sel} {`
+    })
+}
+
 export const insertCustomCssToHead = function (cssCode, formId = '') {
+    cssCode = scopeVFormCss(cssCode, '.form-ns-my01')
     let head = document.getElementsByTagName('head')[0]
     let oldStyle = document.getElementById('vform-custom-css')
     if (!!oldStyle) {

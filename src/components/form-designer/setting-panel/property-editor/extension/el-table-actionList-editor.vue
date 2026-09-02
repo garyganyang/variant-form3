@@ -84,26 +84,14 @@
       </el-table-column>
       <el-table-column prop="onHideOperationButton" label="隐藏按钮" align="center" min-width="120">
         <template #default="scope">
-          <el-button type="info"
-                     disabled
-                     size="small"
-                     icon="el-icon-edit"
-                     plain
-                     round
-                     @click="editEventHandler('onHideOperationButton', scope.row, scope.$index)">
+          <el-button type="info" icon="el-icon-edit" plain round @click="editEventHandler('isHiddenButton', scope.row, scope.$index)">
             编写代码
           </el-button>
         </template>
       </el-table-column>
       <el-table-column prop="onDisableOperationButton" label="禁用按钮" align="center" min-width="120">
         <template #default="scope">
-          <el-button type="info"
-                     disabled
-                     size="small"
-                     icon="el-icon-edit"
-                     plain
-                     round
-                     @click="editEventHandler('onDisableOperationButton', scope.row, scope.$index)">
+          <el-button type="info" icon="el-icon-edit" plain round @click="editEventHandler('isDisableButton', scope.row, scope.$index)">
             编写代码
           </el-button>
         </template>

@@ -123,16 +123,16 @@
           <!--          1.先显示不需要折叠的按钮       -->
           <template v-for="e in field.options.actionList.filter(ee=>ee.isShow && !ee.isCollapsed)">
             <!--          1.1 显示不需要二次确认的按钮       -->
-            <el-button v-if="!e.requireConfirm" link type="primary" @click="clickBtn(scope.row, scope.$index, e)">{{ e.label }}</el-button>
+            <el-button v-if="!e.requireConfirm && !isHidden(scope.row, scope.$index, e)" :disabled="isDisabled(scope.row, scope.$index, e)" link type="primary" @click="clickBtn(scope.row, scope.$index, e)">{{ e.label }}</el-button>
             <!--          1.2 显示需要二次确认的按钮       -->
-            <el-popconfirm v-else
+            <el-popconfirm v-if="e.requireConfirm"
                            class="box-item"
                            width="160"
                            title="确定要这么做吗?"
                            placement="bottom"
                            @confirm.prevent="clickBtn(scope.row, scope.$index, e)">
               <template #reference>
-                <el-button link type="primary">{{ e.label }}</el-button>
+                <el-button v-if="!isHidden(scope.row, scope.$index, e)" :disabled="isDisabled(scope.row, scope.$index, e)" link type="primary">{{ e.label }}</el-button>
               </template>
             </el-popconfirm>
           </template>
@@ -145,16 +145,16 @@
               <div class="custom-dropdown">
                 <template v-for="e in field.options.actionList.filter(ee=>ee.isShow && ee.isCollapsed)">
                   <!--          2.1 显示不需要二次确认的按钮       -->
-                  <el-button v-if="!e.requireConfirm" link type="primary" @click="clickBtn(scope.row, scope.$index, e)">{{ e.label }}</el-button>
+                  <el-button v-if="!e.requireConfirm && !isHidden(scope.row, scope.$index, e)" :disabled="isDisabled(scope.row, scope.$index, e)" link type="primary" @click="clickBtn(scope.row, scope.$index, e)">{{ e.label }}</el-button>
                   <!--          2.2 显示需要二次确认的按钮       -->
-                  <el-popconfirm v-else
+                  <el-popconfirm v-if="e.requireConfirm"
                                  class="box-item"
                                  width="160"
                                  title="确定要这么做吗?"
                                  placement="bottom"
                                  @confirm.prevent="clickBtn(scope.row, scope.$index, e)">
                     <template #reference>
-                      <el-button link type="primary">{{ e.label }}</el-button>
+                      <el-button v-if="!isHidden(scope.row, scope.$index, e)" :disabled="isDisabled(scope.row, scope.$index, e)" link type="primary">{{ e.label }}</el-button>
                     </template>
                   </el-popconfirm>
                 </template>
@@ -230,7 +230,6 @@ export default {
       type: String,
       default: ''
     },
-
   },
   components: {
     ArrowDown,
@@ -243,8 +242,8 @@ export default {
         pageSize: 10,
         pageNum: 1,
         totalElements: 0,
-        data1: [],
-        data: [{}, {}, {}, {}, {
+        data: [],
+        data1: [{}, {}, {}, {}, {
           tags: ["asd", "sdf", "ert", "ert", "公开", "隐藏"],
           jsonArray: [{"label": "大型工程机械检测1", "value": "LARGE_CONSTRUCTION_MACHINERY_DETECTION"}, {"label": "大型工程机械检测2", "value": "LARGE_CONSTRUCTION_MACHINERY_DETECTION"}],
           jsonMap: {"label": "大型工程机械检测", "value": "LARGE_CONSTRUCTION_MACHINERY_DETECTION"},
@@ -300,7 +299,7 @@ export default {
       // 手动强制映射，优先级最高
       // 自定义映射：key=type，value=匹配该类型的文字数组
       const specialMap = {
-        danger: ["隐藏","已隐藏", "已关闭", "已停用", "停用"],
+        danger: ["隐藏", "已隐藏", "已关闭", "已停用", "停用"],
         success: ["公开", "已公开", "启用", "已启用", "通过", "已通过"],
         warning: ["待审核", "审核中"],
         primary: ["完成", "已完成"],
@@ -385,6 +384,16 @@ export default {
         const customFn = new Function('row', 'rowIndex', 'btnConfig', btnConfig.onClick)
         return customFn.call(this, row, index, btnConfig)
       }
+    },
+    isDisabled(row, index, btnConfig) {
+      if (!btnConfig.isDisableButton) return false
+      const customFn = new Function('row', 'rowIndex', 'btnConfig', btnConfig.isDisableButton)
+      return customFn.call(this, row, index, btnConfig)
+    },
+    isHidden(row, index, btnConfig) {
+      if (!btnConfig.isHiddenButton) return false
+      const customFn = new Function('row', 'rowIndex', 'btnConfig', btnConfig.isHiddenButton)
+      return customFn.call(this, row, index, btnConfig)
     },
   }
 }

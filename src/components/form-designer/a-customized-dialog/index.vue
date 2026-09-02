@@ -118,8 +118,8 @@ export default {
       this.parentFormRef = parentFormRef
       const {title, isFullscreen, hasFullscreenBtn, dialogWidth, dialogHeight} = dialogOptions
       this.dialogOptions.title = title
-      this.dialogOptions.dialogHeight = dialogHeight && dialogHeight.length ? dialogHeight : this.dialogOptions.dialogHeight
-      this.dialogOptions.dialogWidth = dialogWidth && dialogWidth.length ? dialogWidth : this.dialogOptions.dialogWidth
+      this.dialogOptions.dialogHeight = (dialogHeight && dialogHeight.length) ? dialogHeight : this.dialogOptions.dialogHeight
+      this.dialogOptions.dialogWidth = (dialogWidth && dialogWidth.length) ? dialogWidth : this.dialogOptions.dialogWidth
       this.dialogOptions.isFullscreen = isFullscreen
       this.dialogOptions.hasFullscreenBtn = hasFullscreenBtn
 

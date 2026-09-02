@@ -609,8 +609,14 @@
        * @param callback 回调函数
        */
       validateForm(callback) {
+        let extraValidateFunc;
+        // 加了一段额外调用表单全局验证方法的逻辑
+        if(window[this.formConfig.formUniqueId] && window[this.formConfig.formUniqueId].extraValidate){
+          extraValidateFunc = window[this.formConfig.formUniqueId].extraValidate
+        }
         this.$refs['renderForm'].validate((valid) => {
-          callback(valid)
+          let keepGoing = extraValidateFunc ? extraValidateFunc() : false
+          if (keepGoing) callback(valid)
         })
       },
 
