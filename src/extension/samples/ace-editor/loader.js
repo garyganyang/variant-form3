@@ -40,6 +40,13 @@ export const loadAceEditorWidget = (app) => {
     PERegister.registerCPEditor(app, 'aceEditorFontSize', 'aceEditorFontSize-editor',
         PEFactory.createInputTextEditor('aceEditorFontSize', 'extension.setting.aceEditorFontSize', '编辑器字体大小(px)', true))
 
+    const valueTypeOptions = [
+        {label: 'JSON对象', value: 'json'},
+        {label: '字符串', value: 'string'},
+    ]
+    PERegister.registerCPEditor(app, 'aceEditorValueType', 'aceEditorValueType-editor',
+        PEFactory.createSelectEditor('aceEditorValueType', 'extension.setting.aceEditorValueType', {optionItems: valueTypeOptions}, '值类型', true))
+
     const langOptions = [
         {label: 'JSON', value: 'json'},
         {label: 'Javascript', value: 'javascript'},

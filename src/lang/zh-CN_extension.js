@@ -36,6 +36,7 @@ export default {
             actionList: '操作列编辑',
             actionColumnFixedWidth: '操作列宽度',
 
+            aceEditorValueType: '值类型',
             aceEditorLang: '编辑器语言',
             aceEditorTheme: '编辑器主题',
             aceEditorFontSize: '编辑器字体大小',

@@ -13,6 +13,7 @@ export const mySchema = {
         hidden: false,
         required: false,
         requiredHint: '',
+        aceEditorValueType:'string',
         aceEditorLang:'json',
         aceEditorFontSize:'18',
         aceEditorTheme:'chrome',
