@@ -22,6 +22,7 @@ import {loadElTreeSelectWidget} from '@/extension/samples/el-tree-select/loader'
 import {loadElStatisticWidget} from '@/extension/samples/el-statistic/loader'
 import {loadVisactorListTableWidget} from '@/extension/samples/visactor-list-table/loader'
 import {loadVisactorSheetTableWidget} from '@/extension/samples/visactor-sheet-table/loader'
+import {loadTiandituMapWidget} from '@/extension/samples/tianditu-map/loader'
 
 
 export const loadExtension = function (app) {
@@ -34,6 +35,7 @@ export const loadExtension = function (app) {
     loadElStatisticWidget(app) // el-statistic 组件
     loadVisactorListTableWidget(app) // visactor-list-table 组件
     loadVisactorSheetTableWidget(app) // visactor-sheet-table 组件
+    loadTiandituMapWidget(app) // tianditu-map 组件
     /**
      * 加载容器组件步骤：
      * 1. 加载组件Json Schema;

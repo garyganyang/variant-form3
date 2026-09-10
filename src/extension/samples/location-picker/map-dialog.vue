@@ -21,8 +21,6 @@
 <script setup>
 /////////////////////////////////   外部依赖导入    //////////////////////////
 import {onMounted, onUnmounted, ref, nextTick, onBeforeUnmount} from "vue"
-import {Edit} from "@element-plus/icons-vue";
-import {ElMessage, ElMessageBox} from "element-plus";
 import axios from 'axios'
 // 引入 OL 核心模块
 import Map from 'ol/Map';

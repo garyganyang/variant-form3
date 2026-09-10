@@ -11,9 +11,12 @@ export default {
       'el-statistic': '统计组件',
       'v-list-table': 'VTable-List',
       'v-sheet-table': 'VTable-Sheet',
+      'tianditu-map': 'openLayer',
     },
 
     setting: {
+      width: "宽度",
+      height: "高度",
       cardFolded: '是否收起',
       cardShowFold: '显示折叠按钮',
       cardWidth: '卡片宽度',
