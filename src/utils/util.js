@@ -64,17 +64,22 @@ const createStyleSheet = function () {
 }
 
 const scopeVFormCss = function (rawCss, nsClass) {
-    // 简单正则，给每个选择器组前插入命名空间前缀
-    const reg = /([^{]+)\{/g
-    return rawCss.replace(reg, (match, selectorGroup) => {
-        const sel = selectorGroup.trim()
-        if(!sel) return match
-        return `${nsClass} ${sel} {`
-    })
+    return rawCss
+      .split('\n')
+      .map(line => {
+          const trimLine = line.trim()
+          // 空行直接原样返回
+          if (!trimLine) return line
+          // @规则、已经带命名空间前缀，直接跳过
+          if(trimLine.startsWith('@') || trimLine.startsWith(nsClass)) return line
+          // 给本行最前面加上 命名空间 + 空格
+          return `${nsClass}${trimLine}`
+      })
+      .join('\n')
 }
 
 export const insertCustomCssToHead = function (cssCode, formId = '') {
-    cssCode = scopeVFormCss(cssCode, '.form-ns-my01')
+    cssCode = scopeVFormCss(cssCode, '.static-content-item')
     let head = document.getElementsByTagName('head')[0]
     let oldStyle = document.getElementById('vform-custom-css')
     if (!!oldStyle) {
