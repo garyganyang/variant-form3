@@ -11,7 +11,7 @@
               v-loading="field.options.loading"
               :data="fieldModel.data"
               :border="field.options.border"
-              :height="field.options.tableHeight? field.options.tableHeight : '300px'"
+              :height="field.options.tableHeight || '300px'"
               style="width: 100%;--el-table-header-bg-color: #fafafa;"
               empty-text="无数据"
               @header-click="onHeaderClick"
@@ -20,7 +20,8 @@
               @cell-click="onCellClick"
               @cell-dblclick="onCellDbClick"
               @selection-change="onSelectionChange">
-      <el-table-column type="index" label="#" width="50" fixed align="center"></el-table-column>
+      <el-table-column v-if="field.options.multiSelection" type="selection" width="50" fixed align="center" />
+      <el-table-column v-if="field.options.indexColumn" type="index" label="#" width="50" fixed align="center"></el-table-column>
 
       <el-table-column v-for="each in field.options.columnList.filter(e=>e.isShow)"
                        :key="each.prop"

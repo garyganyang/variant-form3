@@ -34,6 +34,12 @@ export const loadElTableWidget = (app) => {
     PERegister.registerCPEditor(app, 'el-table-actionColumnFixedWidth', 'el-table-actionColumnFixedWidth-editor',
         PEFactory.createInputTextEditor('actionColumnFixedWidth', 'extension.setting.actionColumnFixedWidth', "操作列固定宽度"))
 
+    PERegister.registerCPEditor(app, 'el-table-multiSelection', 'el-table-multiSelection',
+        PEFactory.createBooleanEditor('multiSelection', 'extension.setting.multiSelection'))
+
+    PERegister.registerCPEditor(app, 'el-table-indexColumn', 'el-table-indexColumn',
+        PEFactory.createBooleanEditor('indexColumn', 'extension.setting.indexColumn'))
+
     PERegister.registerEPEditor(app, 'el-table-onHeaderClick', 'el-table-onHeaderClick-editor',
         PEFactory.createEventHandlerEditor('onHeaderClick', ['column', 'event']))
 
@@ -54,6 +60,9 @@ export const loadElTableWidget = (app) => {
 
     PERegister.registerEPEditor(app, 'el-table-onPageNumChange', 'el-table-onPageNumChange-editor',
         PEFactory.createEventHandlerEditor('onPageNumChange', ['pageNum', 'pageSize']))
+
+    PERegister.registerEPEditor(app, 'el-table-onSelectionChange', 'el-table-onSelectionChange-editor',
+        PEFactory.createEventHandlerEditor('onSelectionChange', ['newSelection']))
 
 
     // PERegister.registerCPEditor(app, 'tianditu-title', 'tianditu-title-editor',

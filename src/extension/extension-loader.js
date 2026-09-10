@@ -20,6 +20,8 @@ import {loadAceEditorWidget} from '@/extension/samples/ace-editor/loader'
 import {loadElTreeWidget} from '@/extension/samples/el-tree/loader'
 import {loadElTreeSelectWidget} from '@/extension/samples/el-tree-select/loader'
 import {loadElStatisticWidget} from '@/extension/samples/el-statistic/loader'
+import {loadVisactorListTableWidget} from '@/extension/samples/visactor-list-table/loader'
+import {loadVisactorSheetTableWidget} from '@/extension/samples/visactor-sheet-table/loader'
 
 
 export const loadExtension = function (app) {
@@ -30,6 +32,8 @@ export const loadExtension = function (app) {
     loadElTreeWidget(app) // el-tree 组件
     loadElTreeSelectWidget(app) // el-tree-select 组件
     loadElStatisticWidget(app) // el-statistic 组件
+    loadVisactorListTableWidget(app) // visactor-list-table 组件
+    loadVisactorSheetTableWidget(app) // visactor-sheet-table 组件
     /**
      * 加载容器组件步骤：
      * 1. 加载组件Json Schema;

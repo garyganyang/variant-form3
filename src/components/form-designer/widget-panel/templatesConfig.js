@@ -552,13 +552,15 @@ export const formTemplates = [
             "onRowClick": "",
             "customClass": "",
             "onCellClick": "",
-            "tableHeight": "calc(100vh-315px)",
+            "tableHeight": "calc(100vh - 315px)",
             "onHeaderClick": "",
             "onPageNumChange": "window['t-blablabla'].getTableData(pageNum, pageSize)",
             "onPageSizeChange": "window['t-blablabla'].getTableData(pageNum, pageSize)",
             "onRowDoubleClick": "",
             "onCellDoubleClick": "",
-            "actionColumnFixedWidth": "120"
+            "actionColumnFixedWidth": "120",
+            "indexColumn": true,
+            "multiSelection": false
           },
           "formItemFlag": false
         }

@@ -1,5 +1,5 @@
 <template>
-  <div v-drag="['.customized-drag-dialog.el-dialog', '.customized-drag-dialog .el-dialog__header']" class="aaa">
+  <div v-drag="['.customized-drag-dialog.el-dialog', '.customized-drag-dialog .el-dialog__header']" class="__customized-drag-dialog">
     <el-dialog v-model="dialogVisible"
                class="customized-drag-dialog small-padding-dialog"
                :show-close="false"
