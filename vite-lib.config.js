@@ -15,8 +15,8 @@ export default defineConfig({
     vueJsx({}),
 
     //解决引入commonjs模块后打包出现的{'default' is not exported by XXX}错误!!
-    commonjs({requireReturnsDefault: true}),  /* 配置requireReturnsDefault属性，
-    解决打包后引入VForm出现的"Axios is not a constructor"错！！ */
+    commonjs({requireReturnsDefault: true}),
+    /* 配置requireReturnsDefault属性，解决打包后引入VForm出现的"Axios is not a constructor"错！！ */
 
     //可视化Bundle
     visualizer(),
@@ -59,13 +59,15 @@ export default defineConfig({
     },
     rollupOptions: {
       // 确保外部化处理那些你不想打包进库的依赖
-      external: ['vue', 'element-plus'],
+      external: ['vue', 'element-plus', '@visactor/vtable', '@visactor/vtable-sheet'],
       output: {
         exports: 'default',  //要支持CDN引入必须设置此参数！！！
         // 在 UMD 构建模式下为这些外部化的依赖提供一个全局变量
         globals: {
           vue: 'Vue',
           'element-plus': 'ElementPlus',
+          '@visactor/vtable': 'VTable',
+          '@visactor/vtable-sheet': 'VTableSheet',
         },
         assetFileNames: `designer.style.css`
       }
