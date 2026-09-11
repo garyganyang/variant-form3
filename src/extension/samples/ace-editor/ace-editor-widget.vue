@@ -109,6 +109,10 @@ export default {
     code: {
       get() {
         const val = this.fieldModel;
+        // ✅ 如果本身就是字符串，直接返回，跳过序列化
+        if (typeof val === 'string') {
+          return val;
+        }
         if (this.field.options.aceEditorValueType === "json") {
           try {
             // 对象 → 格式化JS字符串（支持箭头函数）
